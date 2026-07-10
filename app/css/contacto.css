@@ -224,3 +224,13 @@
   opacity: 0.6;
   cursor: not-allowed;
 }
+
+.form-error-general {
+  margin-bottom: 18px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: #fdecea;
+  color: #b42318;
+  font-size: 0.95rem;
+  font-weight: 500;
+}

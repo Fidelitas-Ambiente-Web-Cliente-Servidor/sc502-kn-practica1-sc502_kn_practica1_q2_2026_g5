@@ -59,26 +59,22 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // Valida el formulario al enviar
-  formulario.addEventListener("submit", function (event) {
-    event.preventDefault();
-
-    const formularioValido = Object.keys(campos).every(function (nombreCampo) {
-      return validarCampo(nombreCampo, true);
-    });
-
-    if (!formularioValido) {
-      botonEnviar.disabled = true;
-      return;
-    }
-
-    mensajeExito.textContent = "Mensaje enviado correctamente. Gracias por contactarnos, pronto te responderemos.";
-    mensajeExito.classList.add("show");
-
-    formulario.reset();
-    limpiarEstadosCampos();
-    botonEnviar.disabled = true;
+// Valida el formulario al enviar.
+// Si todo está correcto, NO se detiene el submit para que PHP guarde en MySQL.
+formulario.addEventListener("submit", function (event) {
+  const formularioValido = Object.keys(campos).every(function (nombreCampo) {
+    return validarCampo(nombreCampo, true);
   });
+
+  if (!formularioValido) {
+    event.preventDefault();
+    botonEnviar.disabled = true;
+    return;
+  }
+
+  botonEnviar.disabled = true;
+  botonEnviar.textContent = "Enviando...";
+});
 
   // Valida un campo específico y muestra su mensaje de error
   function validarCampo(nombreCampo, mostrarMensaje) {

@@ -15,7 +15,7 @@ $controller_activo = isset($_GET['controller']) ? $_GET['controller'] : 'index';
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/cursos.css">
+  <link rel="stylesheet" href="css/<?php echo $controller_activo; ?>.css">
 </head>
 <body>
 

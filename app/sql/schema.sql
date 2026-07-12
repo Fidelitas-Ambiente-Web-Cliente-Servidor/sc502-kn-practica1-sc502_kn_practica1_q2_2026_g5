@@ -29,6 +29,28 @@ INSERT INTO cursos (nombre, categoria, descripcion, duracion, precio) VALUES
 ('Ciberseguridad Básica',      'Redes y Sistemas', 'Principios de seguridad, análisis de vulnerabilidades y buenas prácticas.',       '9 semanas',  60000);
 
 
+-- ================================================================
+-- Tabla: cursos_destacados (Estudiante 1 - Allison)
+-- Cursos destacados mostrados en la página de inicio (Home)
+-- ================================================================
+CREATE TABLE IF NOT EXISTS cursos_destacados (
+    id          INT AUTO_INCREMENT PRIMARY KEY,
+    descripcion TEXT,
+    icono       VARCHAR(10),
+    categoria   VARCHAR(50),
+    bg_class    VARCHAR(20),
+    creado_en   TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- 5 registros de prueba (mínimo requerido: 5)
+INSERT INTO cursos_destacados (nombre, descripcion, icono, categoria, bg_class) VALUES
+('Desarrollo Web Full Stack', 'Domina HTML, CSS, JavaScript, Node.js y bases de datos en un programa completo e intensivo.', '💻', 'Tecnología', 'bg1'),
+('Diseño UX/UI Profesional', 'Crea interfaces atractivas y centradas en el usuario con Figma, Adobe XD y metodologías ágiles.', '🎨', 'Diseño', 'bg2'),
+('Inteligencia Artificial Aplicada', 'Aprende Machine Learning, Python y frameworks modernos para construir soluciones de IA.', '🤖', 'Tecnología', 'bg3'),
+('Ciberseguridad para Principiantes', 'Fundamentos de seguridad informática, ataques comunes y buenas prácticas de protección de datos.', '🛡️', 'Redes y Sistemas', 'bg1'),
+('Marketing Digital y Redes Sociales', 'Estrategias de contenido, SEO y publicidad digital para hacer crecer marcas en internet.', '📱', 'Negocios', 'bg2');
+
+
 -- Tabla: contacto - Estudiante 4 Juan Jose Solano Camacho
 -- Guarda los mensajes enviados desde el formulario de contacto.
 CREATE TABLE IF NOT EXISTS contacto (

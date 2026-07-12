@@ -1,34 +1,4 @@
-
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Academia Grupo5 — Inicio</title>
-  <link rel="stylesheet" href="css/style.css" />
-  <link rel="stylesheet" href="css/index.css" />
-</head>
-<body>
-
-  <nav class="navbar">
-    <div class="navbar-inner">
-      <a href="index.html" class="navbar-brand">
-        <div class="navbar-logo">N</div>
-        Academia <span class="brand-accent">Grupo5</span>
-      </a>
-
-      <button class="navbar-toggle" id="navToggle" aria-label="Abrir menú">
-        <span></span><span></span><span></span>
-      </button>
-
-      <ul class="navbar-links" id="navLinks">
-        <li><a href="index.html" class="active">Inicio</a></li>
-        <li><a href="cursos.html">Cursos</a></li>
-        <li><a href="profesores.html">Profesores</a></li>
-        <li><a href="contacto.html">Contacto</a></li>
-      </ul>
-    </div>
-  </nav>
+<?php require_once 'views/layout/header.php'; ?>
 
   <section class="hero">
     <div class="hero-content">
@@ -40,8 +10,8 @@
           metodologías prácticas y una comunidad que te impulsa.
         </p>
         <div class="hero-buttons">
-          <a href="cursos.html" class="btn-primary">Explorar Cursos</a>
-          <a href="contacto.html" class="btn-outline" style="color:rgba(255,255,255,0.85); border-color:rgba(255,255,255,0.4);">Contáctanos</a>
+          <a href="index.php?controller=cursos&action=index" class="btn-primary">Explorar Cursos</a>
+          <a href="index.php?controller=contacto&action=index" class="btn-outline" style="color:rgba(255,255,255,0.85); border-color:rgba(255,255,255,0.4);">Contáctanos</a>
         </div>
       </div>
 
@@ -87,7 +57,20 @@
         <h2>Cursos Destacados</h2>
         <p>Elige entre nuestros programas más demandados y empieza hoy mismo tu transformación profesional.</p>
       </div>
-      <div class="cards-grid" id="cursosContainer"></div>
+      <div class="cards-grid" id="cursosContainer">
+        <?php foreach ($cursos_destacados as $curso): ?>
+          <div class="course-card">
+            <div class="course-card-img <?php echo htmlspecialchars($curso['bg_class']); ?>">
+              <?php echo htmlspecialchars($curso['icono']); ?>
+            </div>
+            <div class="course-card-body">
+              <h3><?php echo htmlspecialchars($curso['nombre']); ?></h3>
+              <p><?php echo htmlspecialchars($curso['descripcion']); ?></p>
+              <a href="index.php?controller=cursos&action=index" class="btn-primary">Ver más</a>
+            </div>
+          </div>
+        <?php endforeach; ?>
+      </div>
     </div>
   </section>
 
@@ -153,43 +136,4 @@
     </div>
   </section>
 
-
-  <footer class="footer">
-    <div class="footer-inner">
-      <div class="footer-brand">
-        <h3>Academia <span>Grupo5</span></h3>
-        <p>Formando los profesionales del mañana con educación de calidad, accesible y orientada a resultados.</p>
-        <div class="footer-social">
-          <a href="#" title="Facebook">f</a>
-          <a href="#" title="Instagram">ig</a>
-          <a href="#" title="Twitter">tw</a>
-          <a href="#" title="LinkedIn">in</a>
-        </div>
-      </div>
-      <div class="footer-col">
-        <h4>Páginas</h4>
-        <ul>
-          <li><a href="index.html">Inicio</a></li>
-          <li><a href="cursos.html">Cursos</a></li>
-          <li><a href="profesores.html">Profesores</a></li>
-          <li><a href="contacto.html">Contacto</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Contacto</h4>
-        <ul>
-          <li><a href="#">📍 San José, Costa Rica</a></li>
-          <li><a href="#">📞 +506 2200-0000</a></li>
-          <li><a href="#">✉️ info@grupo5.ac.cr</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <span>© 2025 Academia Grupo5. Todos los derechos reservados.</span>
-      <span>Desarrollado por el Grupo — Allison · Emmanuel · Valery · Juan</span>
-    </div>
-  </footer>
-
-  <script src="js/index.js"></script>
-</body>
-</html>
+<?php require_once 'views/layout/footer.php'; ?>

@@ -35,6 +35,7 @@ INSERT INTO cursos (nombre, categoria, descripcion, duracion, precio) VALUES
 -- ================================================================
 CREATE TABLE IF NOT EXISTS cursos_destacados (
     id          INT AUTO_INCREMENT PRIMARY KEY,
+    nombre      VARCHAR(100) NOT NULL,
     descripcion TEXT,
     icono       VARCHAR(10),
     categoria   VARCHAR(50),

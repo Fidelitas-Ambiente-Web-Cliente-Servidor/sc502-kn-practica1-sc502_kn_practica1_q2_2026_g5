@@ -5,20 +5,17 @@
 // y despacha al controlador correspondiente.
 // ================================================================
 
-// Cargar configuración de base de datos
-require_once 'config/database.php';
+require_once __DIR__ . '/config/database.php';
 
-// Cargar modelos
-require_once 'models/IndexModel.php';
-require_once 'models/CursosModel.php';
-require_once 'models/ProfesoresModel.php';
-require_once 'models/ContactoModel.php';
+require_once __DIR__ . '/models/IndexModel.php';
+require_once __DIR__ . '/models/CursosModel.php';
+require_once __DIR__ . '/models/ProfesoresModel.php';
+require_once __DIR__ . '/models/ContactoModel.php';
 
-// Cargar controladores
-require_once 'controllers/IndexController.php';
-require_once 'controllers/CursosController.php';
-require_once 'controllers/ProfesoresController.php';
-require_once 'controllers/ContactoController.php';
+require_once __DIR__ . '/controllers/IndexController.php';
+require_once __DIR__ . '/controllers/CursosController.php';
+require_once __DIR__ . '/controllers/ProfesoresController.php';
+require_once __DIR__ . '/controllers/ContactoController.php';
 
 // Leer parámetros de la URL (por defecto: index)
 $controller = isset($_GET['controller']) ? $_GET['controller'] : 'index';
@@ -39,7 +36,7 @@ switch ($controller) {
         $ctrl = new ContactoController();
         break;
     default:
-        header('Location: index.php?controller=index&action=index');
+        header('Location: /practica1/app/index.php?controller=index&action=index');
         exit;
 }
 

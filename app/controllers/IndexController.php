@@ -24,6 +24,6 @@ class IndexController {
 
         // Cargar la vista — la variable $cursos_destacados queda
         // disponible dentro de index.html
-        require_once 'views/index.html';
+        require_once __DIR__ . '/../views/index.html';
     }
 }

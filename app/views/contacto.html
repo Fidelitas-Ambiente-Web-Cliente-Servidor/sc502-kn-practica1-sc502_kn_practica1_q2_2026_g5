@@ -17,7 +17,7 @@ $mensaje_error = $mensaje_error ?? '';
 
   <nav class="navbar">
     <div class="navbar-inner">
-      <a href="index.php?controller=index&action=index" class="navbar-brand">
+      <a href="/practica1/app/index.php" class="navbar-brand">
         <div class="navbar-logo">N</div>
         Academia <span class="brand-accent">Nexus</span>
       </a>
@@ -27,10 +27,30 @@ $mensaje_error = $mensaje_error ?? '';
       </button>
 
       <ul class="navbar-links" id="navLinks">
-        <li><a href="index.php?controller=index&action=index">Inicio</a></li>
-        <li><a href="index.php?controller=cursos&action=index">Cursos</a></li>
-        <li><a href="index.php?controller=profesores&action=index">Profesores</a></li>
-        <li><a href="index.php?controller=contacto&action=index" class="active">Contacto</a></li>
+<li>
+  <a href="/practica1/app/index.php">Inicio</a>
+</li>
+
+<li>
+  <a href="/practica1/app/index.php?controller=cursos&action=index">
+    Cursos
+  </a>
+</li>
+
+<li>
+  <a href="/practica1/app/index.php?controller=profesores&action=index">
+    Profesores
+  </a>
+</li>
+
+<li>
+  <a
+    href="/practica1/app/index.php?controller=contacto&action=index"
+    class="active"
+  >
+    Contacto
+  </a>
+</li>
       </ul>
     </div>
   </nav>
@@ -88,7 +108,7 @@ $mensaje_error = $mensaje_error ?? '';
       <h3>Envíanos un Mensaje</h3>
       <p>Completa el formulario y te responderemos a la brevedad.</p>
 
-      <form id="contactForm" method="POST" action="index.php?controller=contacto&action=store" novalidate>
+      <form id="contactForm" method="POST" action="/practica1/app/index.php?controller=contacto&action=store" novalidate>
 
         <?php if ($mensaje_exito !== ''): ?>
           <div id="formSuccess" class="form-success show">

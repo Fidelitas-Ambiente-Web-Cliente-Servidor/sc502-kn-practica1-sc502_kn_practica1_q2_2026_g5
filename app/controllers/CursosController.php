@@ -35,6 +35,6 @@ class CursosController {
 
         // Cargar la vista — las variables $cursos, $categorias y
         // $categoria_seleccionada quedan disponibles en cursos.html
-        require_once 'views/cursos.html';
+        require_once __DIR__ . '/../views/cursos.html';
     }
 }

@@ -19,12 +19,12 @@ class ContactoController {
             $mensaje_exito = 'Mensaje enviado correctamente. Gracias por contactarnos, pronto te responderemos.';
         }
 
-        require_once 'views/contacto.html';
+        require_once __DIR__ . '/../views/contacto.html';
     }
 
     public function store() {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            header('Location: index.php?controller=contacto&action=index');
+            header('Location: /practica1/app/index.php?controller=contacto&action=index');
             exit;
         }
 
@@ -40,17 +40,17 @@ class ContactoController {
 
         if (!empty($errores)) {
             $mensaje_error = 'Revisa los campos marcados antes de enviar el mensaje.';
-            require_once 'views/contacto.html';
+            require_once __DIR__ . '/../views/contacto.html';
             return;
         }
 
         try {
             $this->model->create($old);
-            header('Location: index.php?controller=contacto&action=index&success=1');
+            header('Location: /practica1/app/index.php?controller=contacto&action=index&success=1');
             exit;
         } catch (PDOException $e) {
             $mensaje_error = 'No se pudo guardar el mensaje. Intenta nuevamente.';
-            require_once 'views/contacto.html';
+            require_once __DIR__ . '/../views/contacto.html';
         }
     }
 

@@ -1,62 +1,61 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Academia Nexus — Profesores</title>
-  <link rel="stylesheet" href="css/style.css" />
-  <link rel="stylesheet" href="css/profesores.css" />
-</head>
-<body>
+<?php require_once __DIR__ . '/layout/header.php'; ?>
+
+<?php if ($vista === 'detalle'): ?>
+
   <!-- ══════════════════════════════════════
-       MODAL
+       DETALLE DE UN PROFESOR
+       Rol 3: Valery
+       ?controller=profesores&action=show&id=X
        ══════════════════════════════════════ -->
-  <div id="teacherModal" class="modal">
-  <div class="modal-content">
-    <span class="close-btn">&times;</span>
-    <div id="modalBody"></div>
-  </div>
-</div>
-  <!-- ══════════════════════════════════════
-       NAVBAR
-       ══════════════════════════════════════ -->
-  <nav class="navbar">
-    <div class="navbar-inner">
-      <a href="/practica1/app/index.php" class="navbar-brand">
-        <div class="navbar-logo">N</div>
-        Academia <span class="brand-accent">Nexus</span>
-      </a>
-      <button class="navbar-toggle" id="navToggle" aria-label="Abrir menú">
-        <span></span><span></span><span></span>
-      </button>
-      <ul class="navbar-links" id="navLinks">
-        <li>
-  <a href="/practica1/app/index.php">Inicio</a>
-</li>
+  <header class="page-header">
+    <span class="badge-tag" style="background:rgba(255,255,255,0.15); color:#fff;">👩‍🏫 Perfil del instructor</span>
+    <h1><?php echo $profesor ? htmlspecialchars($profesor['nombre']) : 'Profesor no encontrado'; ?></h1>
+    <p>
+      <?php echo $profesor ? htmlspecialchars($profesor['especialidad']) : 'No pudimos encontrar a este profesor en nuestro equipo.'; ?>
+    </p>
+  </header>
 
-<li>
-  <a href="/practica1/app/index.php?controller=cursos&action=index">
-    Cursos
-  </a>
-</li>
+  <section class="team-section">
+    <?php if ($profesor): ?>
+      <div class="mission-card" style="max-width: 650px; margin: 0 auto;">
+        <div class="teacher-avatar <?php echo htmlspecialchars($profesor['avatar_clase']); ?>" style="margin: 0 auto 1.2rem;">
+          <?php echo htmlspecialchars($profesor['avatar_iniciales']); ?>
+        </div>
 
-<li>
-  <a
-    href="/practica1/app/index.php?controller=profesores&action=index"
-    class="active"
-  >
-    Profesores
-  </a>
-</li>
+        <h3 style="text-align:center;"><?php echo htmlspecialchars($profesor['nombre']); ?></h3>
+        <p class="teacher-specialty" style="text-align:center; display:block; margin-bottom:1.2rem;">
+          <?php echo htmlspecialchars($profesor['especialidad']); ?>
+        </p>
 
-<li>
-  <a href="/practica1/app/index.php?controller=contacto&action=index">
-    Contacto
-  </a>
-</li>
-      </ul>
+        <div class="modal-info">
+          <div class="modal-item">
+            <strong>Correo electrónico</strong>
+            <?php echo htmlspecialchars($profesor['correo']); ?>
+          </div>
+          <div class="modal-item">
+            <strong>Cursos que imparte</strong>
+            <?php echo htmlspecialchars($profesor['cursos_que_imparte']); ?>
+          </div>
+          <div class="modal-item">
+            <strong>Experiencia profesional</strong>
+            <?php echo htmlspecialchars($profesor['descripcion']); ?>
+          </div>
+        </div>
+      </div>
+    <?php else: ?>
+      <div class="mission-card" style="max-width: 550px; margin: 0 auto; text-align:center;">
+        <div class="card-icon">🔎</div>
+        <h3>No encontramos a este profesor</h3>
+        <p>Es posible que el enlace sea incorrecto o que el profesor ya no esté en nuestro equipo.</p>
+      </div>
+    <?php endif; ?>
+
+    <div style="text-align:center; margin-top: 2.5rem;">
+      <a href="index.php?controller=profesores&action=index" class="btn-primary">← Volver al equipo de profesores</a>
     </div>
-  </nav>
+  </section>
+
+<?php else: ?>
 
   <!-- ══════════════════════════════════════
        PAGE HEADER
@@ -71,6 +70,9 @@
   <!-- ══════════════════════════════════════
        EQUIPO DE PROFESORES
        Rol 3: Valery
+       Los profesores ahora vienen de la tabla `profesores` (MySQL)
+       y se renderizan del lado del servidor mediante
+       ProfesoresModel::getAll() / ProfesoresController::index().
        ══════════════════════════════════════ -->
   <section class="team-section">
     <div class="section-header">
@@ -79,7 +81,24 @@
       <p>Cada profesor trae años de experiencia en la industria para ofrecerte una formación real y aplicable.</p>
     </div>
 
-    <div class="team-grid" id="teamGrid"></div>
+    <div class="team-grid" id="teamGrid">
+      <?php if (empty($profesores)): ?>
+        <p style="grid-column: 1 / -1; text-align:center; color: var(--color-muted);">
+          Aún no hay profesores registrados.
+        </p>
+      <?php else: ?>
+        <?php foreach ($profesores as $profesor): ?>
+          <a class="teacher-card" href="index.php?controller=profesores&action=show&id=<?php echo urlencode($profesor['id']); ?>">
+            <div class="teacher-avatar <?php echo htmlspecialchars($profesor['avatar_clase']); ?>">
+              <?php echo htmlspecialchars($profesor['avatar_iniciales']); ?>
+            </div>
+            <h3><?php echo htmlspecialchars($profesor['nombre']); ?></h3>
+            <p class="teacher-specialty"><?php echo htmlspecialchars($profesor['especialidad']); ?></p>
+            <p><?php echo htmlspecialchars($profesor['descripcion']); ?></p>
+          </a>
+        <?php endforeach; ?>
+      <?php endif; ?>
+    </div>
   </section>
 
   <!-- ══════════════════════════════════════
@@ -120,64 +139,6 @@
     </div>
   </section>
 
-  <!-- ══════════════════════════════════════
-       FOOTER
-       ══════════════════════════════════════ -->
-  <footer class="footer">
-    <div class="footer-inner">
-      <div class="footer-brand">
-        <h3>Academia <span>Nexus</span></h3>
-        <p>Formando los profesionales del mañana con educación de calidad, accesible y orientada a resultados.</p>
-        <div class="footer-social">
-          <a href="#" title="Facebook">f</a>
-          <a href="#" title="Instagram">ig</a>
-          <a href="#" title="Twitter">tw</a>
-          <a href="#" title="LinkedIn">in</a>
-        </div>
-      </div>
-      <div class="footer-col">
-        <h4>Páginas</h4>
-        <ul>
-<li>
-  <a href="/practica1/app/index.php">Inicio</a>
-</li>
+<?php endif; ?>
 
-<li>
-  <a href="/practica1/app/index.php?controller=cursos&action=index">
-    Cursos
-  </a>
-</li>
-
-<li>
-  <a
-    href="/practica1/app/index.php?controller=profesores&action=index"
-    class="active"
-  >
-    Profesores
-  </a>
-</li>
-
-<li>
-  <a href="/practica1/app/index.php?controller=contacto&action=index">
-    Contacto
-  </a>
-</li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Contacto</h4>
-        <ul>
-          <li><a href="#">📍 San José, Costa Rica</a></li>
-          <li><a href="#">📞 +506 2200-0000</a></li>
-          <li><a href="#">✉️ info@nexus.ac.cr</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <span>© 2025 Academia Nexus. Todos los derechos reservados.</span>
-      <span>Desarrollado por el Grupo — Allison · Emmanuel · Valery · Juan</span>
-    </div>
-  </footer>
-<script src="js/profesores.js"></script>
-</body>
-</html>
+<?php require_once __DIR__ . '/layout/footer.php'; ?>

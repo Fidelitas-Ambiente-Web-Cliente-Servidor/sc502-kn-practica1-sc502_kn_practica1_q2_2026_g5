@@ -71,3 +71,27 @@ INSERT INTO contacto (nombre_completo, correo, telefono, asunto, mensaje) VALUES
 ('Ana Rodríguez Solís', 'ana.rodriguez@example.com', '86666666', 'Consulta de matrícula', 'Deseo saber cuáles son los requisitos para iniciar el proceso de matrícula.'),
 ('Luis Vargas Castro', 'luis.vargas@example.com', '85555555', 'Métodos de pago', 'Necesito información sobre los métodos de pago y posibles facilidades disponibles.'),
 ('Sofía Jiménez Rojas', 'sofia.jimenez@example.com', '84444444', 'Curso recomendado', 'Me gustaría recibir una recomendación sobre cuál curso tomar para iniciar en programación.');
+
+-- ================================================================
+-- Tabla: profesores (Estudiante 3 - Valery)
+-- Equipo de profesores mostrado en la página de Profesores
+-- ================================================================
+CREATE TABLE IF NOT EXISTS profesores (
+    id                  INT AUTO_INCREMENT PRIMARY KEY,
+    nombre              VARCHAR(100) NOT NULL,
+    avatar_iniciales    VARCHAR(5)   NOT NULL,
+    avatar_clase        VARCHAR(20)  NOT NULL,
+    especialidad        VARCHAR(100) NOT NULL,
+    descripcion         TEXT,
+    correo              VARCHAR(120) NOT NULL,
+    cursos_que_imparte  VARCHAR(255),
+    creado_en           TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- 5 registros de prueba (mínimo requerido: 5)
+INSERT INTO profesores (nombre, avatar_iniciales, avatar_clase, especialidad, descripcion, correo, cursos_que_imparte) VALUES
+('Ana Rodríguez',   'AR', 'avatar-1', 'Desarrollo Web',   'Ingeniera en software con 10 años de experiencia en empresas como Google y Amazon.',        'ana@nexus.ac.cr',   'HTML, CSS, JavaScript, React'),
+('Carlos Mora',     'CM', 'avatar-2', 'Ciencia de Datos', 'Doctor en Matemáticas Aplicadas con amplia experiencia en análisis de datos.',              'carlos@nexus.ac.cr','Python, Data Science, Machine Learning'),
+('Laura Pérez',     'LP', 'avatar-3', 'Diseño UX/UI',     'Diseñadora senior especializada en experiencia de usuario y productos digitales.',          'laura@nexus.ac.cr', 'UX Design, UI Design, Figma'),
+('Jorge Fallas',    'JF', 'avatar-4', 'Cloud & DevOps',   'Especialista certificado en AWS, Azure y Google Cloud.',                                    'jorge@nexus.ac.cr', 'AWS, Docker, Kubernetes, DevOps'),
+('Valeria Chacón',  'VC', 'avatar-1', 'Ciberseguridad',   'Analista de seguridad con certificación CompTIA Security+ y experiencia en pentesting.',    'valeria@nexus.ac.cr','Ciberseguridad Básica, Ethical Hacking');
